@@ -1,0 +1,26 @@
+
+ int countPairs(vector<vector<int>> &mat1, vector<vector<int>> &mat2, int n, int x)
+ {
+     int count=0;
+        unordered_map<int,int>m;
+        for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                m[mat1[i][j]]++;
+            }
+        }
+         for(int i=0;i<n;i++)
+        {
+            for(int j=0;j<n;j++)
+            {
+                int key=mat2[i][j];
+                int keyt=x-key;
+                if(m.find(keyt)!=m.end())
+                {count++;
+                m[keyt]--;
+                if(m[keyt]==0)m.erase(keyt);
+                }
+            }
+        }
+        return count;
