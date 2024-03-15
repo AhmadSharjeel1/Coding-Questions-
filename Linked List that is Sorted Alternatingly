@@ -1,0 +1,68 @@
+class Solution
+{
+public:
+    void split(Node *head, Node **front, Node **back)
+    {
+        Node *slow = head;
+        Node *fast = head->next;
+
+        while (fast != nullptr)
+        {
+            fast = fast->next;
+            if (fast != nullptr)
+            {
+                slow = slow->next;
+                fast = fast->next;
+            }
+        }
+
+        *front = head;
+        *back = slow->next;
+        slow->next = nullptr;
+    }
+
+    Node *merge(Node *a, Node *b)
+    {
+        Node dummy(-1);
+        Node *tail = &dummy;
+        dummy.next = nullptr;
+
+        while (a != nullptr && b != nullptr)
+        {
+            if (a->data <= b->data)
+            {
+                tail->next = a;
+                a = a->next;
+            }
+            else
+            {
+                tail->next = b;
+                b = b->next;
+            }
+            tail = tail->next;
+        }
+
+        tail->next = (a != nullptr) ? a : b;
+
+        return dummy.next;
+    }
+
+    void sort(Node **headRef)
+    {
+        Node *head = *headRef;
+        Node *a;
+        Node *b;
+
+        if (head == nullptr || head->next == nullptr)
+        {
+            return;
+        }
+
+        split(head, &a, &b);
+
+        sort(&a);
+        sort(&b);
+
+        *headRef = merge(a, b);
+    }
+};
