@@ -1,0 +1,25 @@
+class Solution
+{
+public:
+    int mxh=0,mxsum=0;
+    void fun(Node* root, int h, int sum){
+         if(root==NULL){
+              if(mxh<h){
+                   mxh=h;
+                   mxsum=sum;
+              }
+              else if(h==mxh) mxsum=max(mxsum,sum);
+              return;
+         }
+         fun(root->left,h+1,sum+root->data);
+         fun(root->right,h+1,sum+root->data);
+         return;
+         
+    }
+    int sumOfLongRootToLeafPath(Node *root)
+    {
+       
+        fun(root,0,0);
+        return mxsum;
+    }
+};
