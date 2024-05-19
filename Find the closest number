@@ -1,0 +1,15 @@
+class Solution {
+public:
+    int findClosest(int n, int k, int arr[]) { 
+        // Complete the function.
+        std::sort(arr, arr + n);
+        int dif = INT_MAX, ans = -1;
+        for (int i = 0; i < n; ++i) {
+            if (std::abs(k - arr[i]) <= dif) {
+                dif = std::abs(k - arr[i]);
+                ans = arr[i];
+            }
+        }
+        return ans;
+    } 
+};
