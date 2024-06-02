@@ -1,0 +1,13 @@
+class Solution {
+  public:
+    int swapNibbles(int n) {
+        
+        //t.me/geeksforgeeks_potd
+
+        int a = n&15;
+        int b = n&240;
+        b=b>>4;
+        a=a<<4;
+        return a+b;
+    }
+};
